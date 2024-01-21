@@ -128,30 +128,49 @@
 
 // promises
 
-console.log('Before');
+// console.log('Before');
 // getUser(1, (user) => {
-//     getRepo(user.gitHubUsername, (repos) => {
-//         getCommits(repos[0], (commits) => {
-//             console.log('Commits', commits);
-//         });
-//     });
-// });
-
-// const p = getUser(1);
-// p.then(user => console.log(user))
+    //     getRepo(user.gitHubUsername, (repos) => {
+        //         getCommits(repos[0], (commits) => {
+            //             console.log('Commits', commits);
+            //         });
+            //     });
+            // });
+            
+            // const p = getUser(1);
+            // p.then(user => console.log(user))
+            //     .catch(err => console.log('Error', err.message));         
+// console.log('After');
+            
+// console.log('Before');
+// getUser(1)
+// .then(user => getRepo(user.gitHubUsername))
+//     .then(repos => getCommits(repos[0]))
+//     .then(commits => console.log('Commits', commits))
 //     .catch(err => console.log('Error', err.message));
 
-getUser(1)
-    .then(user => getRepo(user.gitHubUsername))
-    .then(repos => getCommits(repos[0]))
-    .then(commits => console.log('Commits', commits))
-    .catch(err => console.log('Error', err.message));
 
-
-console.log('After');
+// console.log('After');
 
 
 
+
+
+// Async and Await
+
+async function displayCommits() {
+    try {
+        const user = await getUser(1);
+        console.log(user);
+        const repos = await getRepo(user.gitHubUsername);
+        console.log(repos);
+        const commits = await getCommits(repos[0]);
+        console.log(commits);
+    }catch(err) {
+        console.log('Error', err.message);
+    }
+}
+displayCommits();
 
 
 function getUser(id) {
@@ -175,11 +194,16 @@ function getRepo(username) {
     });
 }
 
+
 function getCommits(repo) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             console.log('Calling GitHub API for commits...');
             resolve(['commit1', 'commit2', 'commit3']);
+            // reject(new Error('Could not get commits'));
         }, 2000);
     });
 }
+
+
+
