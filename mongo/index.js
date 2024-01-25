@@ -123,4 +123,48 @@ async function createCourse() {
 //     console.log(courses);
 // }
 
-getCourses();
+// getCourses();
+
+
+// // updating documents - query first
+
+// async function updateCourse(id) {
+//     const course = await Course.findById(id);
+//     if (!course) return;
+//     course.isPublished = true;
+//     course.author = 'Jabba Jabba';
+//     const result= await course.save();
+//     console.log(result);
+// }
+
+// updateCourse('65b015758a514096ca5913d7');
+
+
+// // updating documents - update first
+// async function updateCourse(id) {
+//     // const result = await Course.updateMany({ _id: id }, {
+//     //     $set: {
+//     //         author: 'Mosh',
+//     //         isPublished: false
+//     //     }
+//     // });
+//     const course = await Course.findByIdAndUpdate(id, {
+//         $set: {
+//             author: 'Mosh',
+//             isPublished: false
+//         }
+//     }, { new: true });
+//     console.log(course);
+// }
+
+// updateCourse('65b015758a514096ca5913d7');
+
+
+// // removing documents
+async function removeCourse(id) {
+    // const result = await Course.deleteOne({ _id: id });
+    const course = await Course.findByIdAndDelete(id);
+    console.log(course);
+
+}
+removeCourse('65b015758a514096ca5913d7');
