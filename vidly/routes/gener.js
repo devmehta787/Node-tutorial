@@ -1,19 +1,12 @@
+const { Gener, validateGener } = require('../models/gener');
+
 const express = require('express');
 const Joi = require('joi');
 const router = express.Router();
 const mongoose = require('mongoose');
 
 
-const genersSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 25,
-    },
-});
 
-const Gener = mongoose.model('Gener', genersSchema);
 
 // const geners = [
 //     { id: 1, name: `Action` },
@@ -84,16 +77,6 @@ router.delete('/:id', async (req, res) => {
 
     res.send(geners);
 });
-
-
-
-//validate the gener
-function validateGener(gener) {
-    const schema = {
-        name: Joi.string().min(3).required()
-    };
-    return Joi.validate(gener, schema);
-}
 
 
 module.exports = router;
