@@ -23,15 +23,15 @@ const courseSchema = new mongoose.Schema({
     
     // custom validation
     
-    // tags: {
-    //     type: Array,
-    //     validate: {
-    //         validator: function (v) {
-    //             return v && v.length > 0;
-    //         },
-    //         message: 'A course should have at least one tag.',
-    //     },  
-    // },
+    tags: {
+        type: Array,
+        validate: {
+            validator: function (v) {
+                return v && v.length > 0;
+            },
+            message: 'A course should have at least one tag.',
+        },  
+    },
     
     // async validation
     
